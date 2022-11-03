@@ -1,6 +1,17 @@
 ---
-- name: Join node to Kubernetes master
-  shell: >
-    {{ kubernetes_join_command }}
-    creates=/etc/kubernetes/kubelet.conf
-  tags: ['skip_ansible_lint']
+# - name: Join node to Kubernetes master
+#   shell: >
+#     {{ kubernetes_join_command }}
+#     creates=/etc/kubernetes/kubelet.conf
+#   tags: ['skip_ansible_lint']
+
+- name: Copy the join command to {{ k8s_cluster_name }} cluster
+  copy: 
+    src: "./{{ k8s_cluster_name }}-join-command" 
+    dest: /home/{{ k8s_node_admin_user }}/{{ k8s_cluster_name }}-join-command
+    owner: "{{ k8s_node_admin_user }}"
+    group: "{{ k8s_node_admin_group }}"
+    mode: 0760  
+
+- name: Join the node to cluster {{ k8s_cluster_name }}
+  command: sh /home/{{ k8s_node_admin_user }}/{{ k8s_cluster_name }}-join-command
