@@ -57,7 +57,7 @@
 - name: Configure Calico networking.
   command: "{{ item }}"
   with_items:
-    - kubectl create -f {{ kubernetes_calico_tigera-operator }}
+    - kubectl create -f {{ kubernetes_calico_tigera_operator }}
     - kubectl create -f {{ kubernetes_calico_manifest_file }}
   register: calico_result
   changed_when: "'created' in calico_result.stdout"
