@@ -85,3 +85,16 @@
     - kubernetes_allow_pods_on_master | bool
     - not kubernetes_init_stat.stat.exists
 
+- name: Create .kube dir for {{ k8s_master_admin_user }} user
+  file:
+      path: "/home/{{ k8s_master_admin_user }}/.kube"
+      state: directory
+
+- name: Copy kube config to {{ k8s_master_admin_user }} home .kube dir
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest:  /home/{{ k8s_master_admin_user }}/.kube/config
+    remote_src: yes
+    owner: "{{ k8s_master_admin_user }}"
+    group: "{{ k8s_master_admin_group }}"
+    mode: 0660
