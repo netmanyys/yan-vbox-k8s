@@ -22,8 +22,6 @@
     kubeadm init
     --config {{ kubernetes_kubeadm_kubelet_config_file_path }}
     --ignore-preflight-errors={{ kubernetes_ignore_preflight_errors }}
-    --control-plane-endpoint {{ k8s_cp_ip }}:6443
-    --apiserver-advertise-address {{ k8s_cp_ip }}
     {{ kubernetes_kubeadm_init_extra_opts }}
   register: kubeadmin_init
   when: (not kubernetes_init_stat.stat.exists) and (kubernetes_ignore_preflight_errors is defined)

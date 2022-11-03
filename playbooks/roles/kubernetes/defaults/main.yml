@@ -34,7 +34,7 @@ kubernetes_config_kubelet_configuration:
 
 kubernetes_config_init_configuration:
   localAPIEndpoint:
-    advertiseAddress: "{{ kubernetes_apiserver_advertise_address | default(ansible_default_ipv4.address, true) }}"
+    advertiseAddress: "{{ kubernetes_apiserver_advertise_address }}"
 # if you use the next lines, remove the command line argument below
 # nodeRegistration:
 #    ignorePreflightErrors:
@@ -47,7 +47,7 @@ kubernetes_config_cluster_configuration:
 
 kubernetes_config_kube_proxy_configuration: {}
 
-kubernetes_apiserver_advertise_address: ''
+kubernetes_apiserver_advertise_address: "{{ k8s_cp_ip }}"
 kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
 kubernetes_ignore_preflight_errors: 'all'
 
