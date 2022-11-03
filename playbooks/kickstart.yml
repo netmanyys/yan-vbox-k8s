@@ -1,5 +1,5 @@
 ---
-- hosts: k8s-m-*
+- hosts: all
   become: yes
   vars:
     kubernetes_allow_pods_on_master: true
