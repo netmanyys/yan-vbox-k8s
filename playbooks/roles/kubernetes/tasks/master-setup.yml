@@ -95,3 +95,4 @@
     src: /etc/kubernetes/admin.conf
     dest: $HOME/.kube/config
     owner: vagrant
+  delegate_to: localhost
