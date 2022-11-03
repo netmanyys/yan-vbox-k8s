@@ -84,3 +84,14 @@
   when:
     - kubernetes_allow_pods_on_master | bool
     - not kubernetes_init_stat.stat.exists
+
+- name: create directory
+  file: 
+    path: $HOME/.kube
+    state: directory
+
+- name: copy file
+  copy: 
+    src: /etc/kubernetes/admin.conf
+    dest: $HOME/.kube/config
+    owner: vagrant
