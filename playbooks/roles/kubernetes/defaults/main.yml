@@ -15,7 +15,7 @@ kubernetes_version_rhel_package: '1.21.4'
 kubernetes_role: master
 
 # This is deprecated. Please use kubernetes_config_kubelet_configuration instead.
-kubernetes_kubelet_extra_args: ""
+kubernetes_kubelet_extra_args: "--node-ip={{ k8s_node_public_ip }}"
 
 kubernetes_kubeadm_init_extra_opts: ""
 kubernetes_join_command_extra_opts: ""
