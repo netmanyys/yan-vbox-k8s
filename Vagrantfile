@@ -63,6 +63,7 @@ Vagrant.configure("2") do |config|
                 ansible.extra_vars = {
                     k8s_cluster_name:     K8S_NAME,
                     kubernetes_role:      "node",
+                    k8s_version:            K8S_VER,
                     k8s_node_admin_user:  "vagrant",
                     k8s_node_admin_group: "vagrant",
                     k8s_node_public_ip: "#{IP_BASE}#{j + 10 + MASTERS_NUM}"

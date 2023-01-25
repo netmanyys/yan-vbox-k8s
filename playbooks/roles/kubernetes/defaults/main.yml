@@ -9,8 +9,8 @@ kubernetes_packages:
   - name: kubernetes-cni
     state: present
 
-kubernetes_version: k8s_version
-kubernetes_version_rhel_package: k8s_version
+kubernetes_version: "{{ k8s_version }}"
+kubernetes_version_rhel_package: "{{ k8s_version }}"
 
 kubernetes_role: master
 
