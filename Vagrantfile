@@ -1,6 +1,6 @@
 IMAGE_NAME = "ubuntu/focal64"
 K8S_NAME = "yan-k8s-01"
-K8S_VER = "1.23"
+K8S_VER = "1.24"
 CONTAINER_RUNTIME = "containerd"
 MASTERS_NUM = 1
 MASTERS_CPU = 2
