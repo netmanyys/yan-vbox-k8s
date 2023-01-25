@@ -3,7 +3,6 @@
   become: yes
   vars:
     kubernetes_allow_pods_on_master: true
-
   roles:
-    - containerd
+    - '{{ container_runtime }}'
     - kubernetes
