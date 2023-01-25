@@ -1,5 +1,7 @@
 IMAGE_NAME = "ubuntu/focal64"
 K8S_NAME = "yan-k8s-01"
+K8S_VER = "1.23"
+CONTAINER_RUNTIME = "containerd"
 MASTERS_NUM = 1
 MASTERS_CPU = 2
 MASTERS_MEM = 2048
@@ -34,6 +36,8 @@ Vagrant.configure("2") do |config|
                 ansible.extra_vars = {
                     k8s_cluster_name:       K8S_NAME,
                     kubernetes_role:        "master",
+                    k8s_version:            K8S_VER,
+                    container_runtime:      CONTAINER_RUNTIME,
                     k8s_master_admin_user:  "vagrant",
                     k8s_master_admin_group: "vagrant",
                     k8s_master_apiserver_advertise_address: "#{IP_BASE}#{i + 10}",
@@ -61,6 +65,8 @@ Vagrant.configure("2") do |config|
                 ansible.extra_vars = {
                     k8s_cluster_name:     K8S_NAME,
                     kubernetes_role:      "node",
+                    k8s_version:            K8S_VER,
+                    container_runtime:      CONTAINER_RUNTIME,
                     k8s_node_admin_user:  "vagrant",
                     k8s_node_admin_group: "vagrant",
                     k8s_node_public_ip: "#{IP_BASE}#{j + 10 + MASTERS_NUM}"
