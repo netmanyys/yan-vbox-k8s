@@ -32,7 +32,7 @@
     update_cache: true
 
 - name: Ensure containerd is installed.
-  package:
+  apt:
     name: "{{ containerd_package }}"
     state: present
 
