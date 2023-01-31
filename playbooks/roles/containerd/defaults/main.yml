@@ -1,6 +1,6 @@
 ---
 # Package options.
-containerd_package: containerd.io=1.6.15
+containerd_package: containerd.io=1.6.15-1
 
 # Service options.
 containerd_service_state: started
