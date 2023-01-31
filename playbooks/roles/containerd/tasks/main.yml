@@ -1,4 +1,5 @@
 ---
+---
 - name: Ensure dependencies are installed.
   apt:
     name:
@@ -30,9 +31,6 @@
     repo: "{{ docker_apt_repository }}"
     state: present
     update_cache: true
-
-- include_tasks: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
 
 - name: Ensure containerd is installed.
   package:
