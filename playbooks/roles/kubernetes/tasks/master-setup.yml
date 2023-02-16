@@ -54,6 +54,11 @@
   changed_when: "'created' in flannel_result.stdout"
   when: kubernetes_pod_network.cni == 'flannel'
 
+- name: Copy Calico file to remote node
+  copy:
+    src:  calico.yaml
+    dest: calico.yaml
+
 - name: Configure Calico networking.
   command: "{{ item }}"
   with_items:
