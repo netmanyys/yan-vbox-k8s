@@ -57,7 +57,7 @@
 - name: Configure Calico networking.
   command: "{{ item }}"
   with_items:
-    - kubectl create -f {{ kubernetes_calico_manifest_file }}
+    - kubectl create -f calico.yaml
   register: calico_result
   changed_when: "'created' in calico_result.stdout"
   when: kubernetes_pod_network.cni == 'calico'
