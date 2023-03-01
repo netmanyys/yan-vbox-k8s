@@ -83,11 +83,11 @@
 
 # TODO: Check if taint exists with something like `kubectl describe nodes`
 # instead of using kubernetes_init_stat.stat.exists check.
-- name: Allow pods on master node (if configured).
-  command: "kubectl taint nodes --all node-role.kubernetes.io/control-plane-"
-  when:
-    - kubernetes_allow_pods_on_master | bool
-    - not kubernetes_init_stat.stat.exists
+#- name: Allow pods on master node (if configured).
+#  command: "kubectl taint nodes --all node-role.kubernetes.io/control-plane-"
+#  when:
+#    - kubernetes_allow_pods_on_master | bool
+#    - not kubernetes_init_stat.stat.exists
 
 - name: Create .kube dir for {{ k8s_master_admin_user }} user
   file:

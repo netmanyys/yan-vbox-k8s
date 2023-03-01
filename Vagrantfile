@@ -1,6 +1,6 @@
 IMAGE_NAME = "ubuntu/focal64"
 K8S_NAME = "yan-k8s-01"
-K8S_VER = "1.25"
+K8S_VER = "1.23"
 CONTAINER_RUNTIME = "containerd"
 MASTERS_NUM = 1
 MASTERS_CPU = 2
@@ -55,8 +55,12 @@ Vagrant.configure("2") do |config|
             node.vm.network "private_network", ip: "#{IP_BASE}#{j + 10 + MASTERS_NUM}"
             node.vm.hostname = "k8s-n-#{j}"
             node.vm.provider "virtualbox" do |v|
+                unless File.exist?("./k8s-n-#{j}-secondDisk.vdi")
+                  v.customize ['createhd', '--filename', "./k8s-n-#{j}-secondDisk.vdi", '--variant', 'Fixed', '--size', 10 * 1024]
+                end
                 v.memory = NODES_MEM
                 v.cpus = NODES_CPU
+                v.customize ['storageattach', :id,  '--storagectl', 'SCSI', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', "./k8s-n-#{j}-secondDisk.vdi"]
                 #v.customize ["modifyvm", :id, "--cpuexecutioncap", "20"]
             end
             node.vm.provision "ansible" do |ansible|
