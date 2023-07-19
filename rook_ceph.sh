@@ -163,3 +163,5 @@ EOF
 kubectl apply -f storageclass.yaml
 
 kubectl -n rook-ceph get CephFilesystem
+kubectl get storageclass
+
