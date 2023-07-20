@@ -1,6 +1,6 @@
 # yan-vbox-k8s
 ## start a cluster
-vagrant up
+./start.sh
 
 ## teardown a cluster
 vagrant destroy -f

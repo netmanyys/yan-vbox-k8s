@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
       end
 
 
-    (1..MASTERS_NUM).each do |i|
+      (1..MASTERS_NUM).each do |i|
         config.vm.define "k8s-m-#{i}" do |master|
             master.vm.box = IMAGE_NAME
             master.vm.network "private_network", ip: "#{IP_BASE}#{i + 10}"
@@ -46,6 +46,7 @@ Vagrant.configure("2") do |config|
                     k8s_cp_ip: "#{IP_BASE}#{1 + 10}"
                 }
             end
+            master.vm.provision "shell", path: "playbooks/rook-ceph.sh"
         end
     end
 
