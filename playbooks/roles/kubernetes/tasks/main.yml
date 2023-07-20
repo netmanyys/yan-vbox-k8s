@@ -57,3 +57,7 @@
 
 - include_tasks: node-setup.yml
   when: kubernetes_role == 'node'
+
+# Install rook-ceph
+- include_tasks: post-installation.yml
+  when: kubernetes_role == 'master'
