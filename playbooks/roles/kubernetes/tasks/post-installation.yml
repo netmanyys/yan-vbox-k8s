@@ -1,0 +1,34 @@
+---
+- name: Copy helm scripts to target
+  copy:
+    src: get_helm.sh 
+    dest: /tmp/get_helm.sh 
+    mode: '0755'    # This ensures the script is executable
+
+- name: Install helm on cluster
+  shell: timeout 300s /tmp/get_helm.sh > /tmp/helm.log 
+  register: helm_install
+  ignore_errors: True 
+
+- name: gather helm logs 
+  shell: cat /tmp/helm.log  
+  register: helm_log_output
+  ignore_errors: True
+  no_log: True
+
+- name: print helm logs
+  debug:
+    var: helm_log_output.stdout_lines
+  when: helm_log_output is defined and helm_log_output.stdout_lines is defined
+
+- name: fail if helm_install installation timed-out or failed
+  fail:
+    msg: "Unable to complete helm installation in 5 mins."
+  when: helm_install.failed
+
+
+- name: Copy prometheus helm chart to target
+  copy:
+    src: prometheus.tar.gz
+    dest: /tmp/prometheus.tar.gz
+    mode: '0755'    # This ensures the script is executable
